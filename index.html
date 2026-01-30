@@ -642,6 +642,249 @@
       }
     }
 
+    /* ── Scroll Progress Bar ── */
+    .scroll-progress {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 3px;
+      background: linear-gradient(90deg, #667eea, #a855f7, #ec4899);
+      z-index: 10000;
+      transition: width 0.05s linear;
+      border-radius: 0 2px 2px 0;
+    }
+
+    /* ── Dark Mode Toggle ── */
+    .theme-toggle {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      z-index: 10001;
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      border: none;
+      cursor: pointer;
+      background: rgba(255, 255, 255, 0.12);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+      font-size: 1.4rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+                  background 0.3s, box-shadow 0.3s;
+    }
+
+    .theme-toggle:hover {
+      transform: scale(1.1) rotate(20deg);
+      box-shadow: 0 6px 24px rgba(0, 0, 0, 0.2);
+    }
+
+    .theme-toggle:active {
+      transform: scale(0.9);
+    }
+
+    .theme-toggle .toggle-icon {
+      transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .theme-toggle:hover .toggle-icon {
+      transform: rotate(30deg);
+    }
+
+    /* ── Dark Mode Styles ── */
+    body.dark {
+      background: #121218;
+      color: #e0e0e8;
+    }
+
+    body.dark .card {
+      background: rgba(30, 30, 45, 0.85);
+      border-color: rgba(255, 255, 255, 0.06);
+      box-shadow: 0 4px 24px rgba(0, 0, 0, 0.3);
+    }
+
+    body.dark .card:hover {
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+    }
+
+    body.dark .card p {
+      color: #b0b0c0;
+    }
+
+    body.dark .hobby-item {
+      background: linear-gradient(135deg, #1e1e2e, #252540);
+      border-color: rgba(102, 126, 234, 0.12);
+    }
+
+    body.dark .hobby-item:hover {
+      background: linear-gradient(135deg, #252540, #302b63);
+    }
+
+    body.dark .hobby-label {
+      color: #c8c8d8;
+    }
+
+    body.dark .skill-tag {
+      background: linear-gradient(135deg, #1e1e3a, #2a2550);
+      color: #b8b0e8;
+      border-color: rgba(102, 126, 234, 0.2);
+    }
+
+    body.dark .contact-list li:hover {
+      background: rgba(102, 126, 234, 0.08);
+    }
+
+    body.dark .contact-list .label {
+      color: #777;
+    }
+
+    body.dark .contact-list .value {
+      color: #d0d0e0;
+    }
+
+    body.dark .theme-toggle {
+      background: rgba(40, 40, 60, 0.8);
+      border-color: rgba(255, 255, 255, 0.1);
+    }
+
+    body.dark footer {
+      color: #555;
+    }
+
+    /* ── Mouse Trail Particle ── */
+    .trail-particle {
+      position: fixed;
+      pointer-events: none;
+      z-index: 9998;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      animation: trail-fade 0.8s ease-out forwards;
+    }
+
+    @keyframes trail-fade {
+      0% {
+        opacity: 0.7;
+        transform: scale(1);
+      }
+      100% {
+        opacity: 0;
+        transform: scale(0);
+      }
+    }
+
+    /* ── Typing cursor ── */
+    .typing-cursor {
+      display: inline-block;
+      width: 2px;
+      height: 1.1em;
+      background: rgba(255, 255, 255, 0.7);
+      margin-left: 2px;
+      vertical-align: text-bottom;
+      animation: blink-cursor 0.75s step-end infinite;
+    }
+
+    @keyframes blink-cursor {
+      50% { opacity: 0; }
+    }
+
+    /* ── Konami Easter Egg - Rainbow Mode ── */
+    body.rainbow .hero {
+      animation: rainbow-bg 3s linear infinite;
+    }
+
+    @keyframes rainbow-bg {
+      0% { filter: hue-rotate(0deg); }
+      100% { filter: hue-rotate(360deg); }
+    }
+
+    body.rainbow .card {
+      animation: rainbow-border 2s linear infinite;
+    }
+
+    @keyframes rainbow-border {
+      0% { border-color: #667eea; }
+      25% { border-color: #ec4899; }
+      50% { border-color: #f59e0b; }
+      75% { border-color: #10b981; }
+      100% { border-color: #667eea; }
+    }
+
+    body.rainbow .card h2::after {
+      animation: rainbow-gradient 2s linear infinite;
+      background-size: 200% 100%;
+      background: linear-gradient(90deg, #667eea, #ec4899, #f59e0b, #10b981, #667eea);
+      background-size: 200% 100%;
+    }
+
+    @keyframes rainbow-gradient {
+      0% { background-position: 0% 50%; }
+      100% { background-position: 200% 50%; }
+    }
+
+    .easter-egg-toast {
+      position: fixed;
+      bottom: 30px;
+      left: 50%;
+      transform: translateX(-50%) translateY(100px);
+      background: rgba(20, 20, 40, 0.95);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      color: #fff;
+      padding: 16px 32px;
+      border-radius: 16px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      z-index: 10002;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+      transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+      white-space: nowrap;
+    }
+
+    .easter-egg-toast.show {
+      transform: translateX(-50%) translateY(0);
+    }
+
+    /* ── Click counter badge ── */
+    .click-counter {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      z-index: 10001;
+      background: rgba(30, 30, 50, 0.85);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: #fff;
+      padding: 10px 18px;
+      border-radius: 100px;
+      font-size: 0.8rem;
+      font-weight: 500;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+      cursor: default;
+      transition: transform 0.3s, opacity 0.3s;
+      opacity: 0;
+    }
+
+    .click-counter.visible {
+      opacity: 1;
+    }
+
+    .click-counter.bump {
+      animation: counter-bump 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    @keyframes counter-bump {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.15); }
+      100% { transform: scale(1); }
+    }
+
     /* ── Prefers reduced motion ── */
     @media (prefers-reduced-motion: reduce) {
       .fade-up {
@@ -661,16 +904,55 @@
 
       .confetti,
       .floating-emoji,
-      .sparkle {
+      .sparkle,
+      .trail-particle {
         display: none;
+      }
+
+      body.rainbow .hero,
+      body.rainbow .card,
+      body.rainbow .card h2::after {
+        animation: none;
+      }
+    }
+
+    /* ── Dark mode + mobile ── */
+    @media (max-width: 480px) {
+      .theme-toggle {
+        width: 44px;
+        height: 44px;
+        top: 14px;
+        right: 14px;
+        font-size: 1.2rem;
+      }
+
+      .click-counter {
+        bottom: 14px;
+        right: 14px;
+        font-size: 0.72rem;
+        padding: 8px 14px;
       }
     }
   </style>
 </head>
 <body>
 
+  <!-- Scroll Progress -->
+  <div class="scroll-progress" id="scrollProgress"></div>
+
+  <!-- Dark Mode Toggle -->
+  <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
+    <span class="toggle-icon">🌙</span>
+  </button>
+
+  <!-- Click Counter -->
+  <div class="click-counter" id="clickCounter">Clicks: 0</div>
+
+  <!-- Konami Toast -->
+  <div class="easter-egg-toast" id="konamiToast">🌈 Rainbow Mode Activated! 🦄</div>
+
   <!-- Hero -->
-  <section class="hero">
+  <section class="hero" id="heroSection">
     <div class="hero-grid"></div>
     <div class="hero-content">
       <div class="avatar">K</div>
@@ -746,7 +1028,7 @@
           <div class="icon">✉</div>
           <div>
             <div class="label">Email</div>
-            <div class="value"><a href="mailto:kazuto@example.com">kimukimuok805@gmail.com</a></div>
+            <div class="value"><a href="mailto:kimukimuok805@gmail.com">kimukimuok805@gmail.com</a></div>
           </div>
         </li>
         <li>
@@ -783,6 +1065,173 @@
       { threshold: 0.1, rootMargin: "0px 0px -40px 0px" }
     );
     document.querySelectorAll(".fade-up").forEach((el) => observer.observe(el));
+
+    /* ═══════════════════════════════
+       1. Scroll Progress Bar
+       ═══════════════════════════════ */
+    const scrollProgress = document.getElementById("scrollProgress");
+    window.addEventListener("scroll", () => {
+      const scrollTop = document.documentElement.scrollTop;
+      const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const progress = scrollHeight > 0 ? (scrollTop / scrollHeight) * 100 : 0;
+      scrollProgress.style.width = progress + "%";
+    });
+
+    /* ═══════════════════════════════
+       2. Dark Mode Toggle
+       ═══════════════════════════════ */
+    const themeToggle = document.getElementById("themeToggle");
+    const toggleIcon = themeToggle.querySelector(".toggle-icon");
+    let isDark = localStorage.getItem("theme") === "dark";
+
+    function applyTheme() {
+      document.body.classList.toggle("dark", isDark);
+      toggleIcon.textContent = isDark ? "☀️" : "🌙";
+      localStorage.setItem("theme", isDark ? "dark" : "light");
+    }
+    applyTheme();
+
+    themeToggle.addEventListener("click", () => {
+      isDark = !isDark;
+      applyTheme();
+    });
+
+    /* ═══════════════════════════════
+       3. Typing Animation (Subtitle)
+       ═══════════════════════════════ */
+    const subtitleEl = document.querySelector(".hero .subtitle");
+    const titles = [
+      "Web Developer / Software Engineer",
+      "Vue.js & Ruby on Rails",
+      "Saitama, Japan"
+    ];
+    let titleIndex = 0;
+    let charIndex = 0;
+    let isDeleting = false;
+    let typingPaused = false;
+
+    function typeLoop() {
+      const current = titles[titleIndex];
+
+      if (typingPaused) {
+        setTimeout(typeLoop, 1500);
+        typingPaused = false;
+        isDeleting = true;
+        return;
+      }
+
+      if (!isDeleting) {
+        charIndex++;
+        subtitleEl.innerHTML = current.slice(0, charIndex) + '<span class="typing-cursor"></span>';
+        if (charIndex === current.length) {
+          typingPaused = true;
+        }
+        setTimeout(typeLoop, 60 + Math.random() * 40);
+      } else {
+        charIndex--;
+        subtitleEl.innerHTML = current.slice(0, charIndex) + '<span class="typing-cursor"></span>';
+        if (charIndex === 0) {
+          isDeleting = false;
+          titleIndex = (titleIndex + 1) % titles.length;
+        }
+        setTimeout(typeLoop, 30);
+      }
+    }
+    setTimeout(typeLoop, 2000);
+
+    /* ═══════════════════════════════
+       4. Mouse Trail (Hero section)
+       ═══════════════════════════════ */
+    const heroSection = document.getElementById("heroSection");
+    const trailColors = ["#667eea", "#a855f7", "#ec4899", "#818cf8"];
+    let trailThrottle = 0;
+
+    heroSection.addEventListener("mousemove", (e) => {
+      const now = Date.now();
+      if (now - trailThrottle < 40) return;
+      trailThrottle = now;
+
+      const particle = document.createElement("div");
+      particle.className = "trail-particle";
+      particle.style.left = e.clientX + "px";
+      particle.style.top = e.clientY + "px";
+      particle.style.background = trailColors[Math.floor(Math.random() * trailColors.length)];
+      particle.style.width = particle.style.height = (4 + Math.random() * 6) + "px";
+      particle.style.boxShadow = `0 0 6px ${particle.style.background}`;
+      document.body.appendChild(particle);
+      particle.addEventListener("animationend", () => particle.remove());
+    });
+
+    /* ═══════════════════════════════
+       5. Konami Code Easter Egg
+       ↑↑↓↓←→←→BA
+       ═══════════════════════════════ */
+    const konamiSequence = [
+      "ArrowUp", "ArrowUp", "ArrowDown", "ArrowDown",
+      "ArrowLeft", "ArrowRight", "ArrowLeft", "ArrowRight",
+      "b", "a"
+    ];
+    let konamiIndex = 0;
+    let rainbowActive = false;
+
+    const konamiToast = document.getElementById("konamiToast");
+
+    document.addEventListener("keydown", (e) => {
+      const expected = konamiSequence[konamiIndex];
+      if (e.key === expected || e.key.toLowerCase() === expected) {
+        konamiIndex++;
+        if (konamiIndex === konamiSequence.length) {
+          konamiIndex = 0;
+          rainbowActive = !rainbowActive;
+          document.body.classList.toggle("rainbow", rainbowActive);
+
+          konamiToast.textContent = rainbowActive
+            ? "🌈 Rainbow Mode Activated! 🦄"
+            : "Rainbow Mode Off 👋";
+          konamiToast.classList.add("show");
+          setTimeout(() => konamiToast.classList.remove("show"), 3000);
+
+          if (rainbowActive) {
+            launchConfetti(window.innerWidth / 2, window.innerHeight / 3, 50);
+          }
+        }
+      } else {
+        konamiIndex = 0;
+      }
+    });
+
+    /* ═══════════════════════════════
+       Click Counter (global)
+       ═══════════════════════════════ */
+    const clickCounterEl = document.getElementById("clickCounter");
+    let totalClicks = 0;
+    const milestones = {
+      10:  "10 clicks! 🎯",
+      25:  "25 clicks! 🔥 On fire!",
+      50:  "50 clicks! ⭐ Super clicker!",
+      100: "100 clicks! 🏆 Legend!",
+      200: "200 clicks! 💎 Unstoppable!"
+    };
+
+    function bumpCounter() {
+      totalClicks++;
+      clickCounterEl.textContent = `Clicks: ${totalClicks}`;
+      if (totalClicks >= 5) clickCounterEl.classList.add("visible");
+
+      clickCounterEl.classList.remove("bump");
+      void clickCounterEl.offsetWidth;
+      clickCounterEl.classList.add("bump");
+
+      if (milestones[totalClicks]) {
+        konamiToast.textContent = milestones[totalClicks];
+        konamiToast.classList.add("show");
+        setTimeout(() => konamiToast.classList.remove("show"), 2500);
+        launchConfetti(window.innerWidth / 2, window.innerHeight / 2, 20);
+      }
+    }
+
+    document.querySelectorAll(".hero-btn, .avatar, .hobby-item, .skill-tag, .contact-list .icon")
+      .forEach((el) => el.addEventListener("click", bumpCounter));
 
     /* ── Confetti burst ── */
     const CONFETTI_EMOJIS = ["🎉", "🎊", "✨", "⭐", "💜", "💙", "🌟", "🎵", "🚀", "💫"];
