@@ -446,6 +446,202 @@
       }
     }
 
+    /* ── Hero Button ── */
+    .hero-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 32px;
+      padding: 14px 36px;
+      border: none;
+      border-radius: 100px;
+      background: linear-gradient(135deg, #667eea, #a855f7);
+      color: #fff;
+      font-family: inherit;
+      font-size: 1rem;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      cursor: pointer;
+      position: relative;
+      z-index: 1;
+      overflow: hidden;
+      transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1),
+                  box-shadow 0.3s;
+      box-shadow: 0 4px 20px rgba(102, 126, 234, 0.4);
+    }
+
+    .hero-btn::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, #a855f7, #667eea);
+      opacity: 0;
+      transition: opacity 0.3s;
+      z-index: -1;
+    }
+
+    .hero-btn:hover {
+      transform: translateY(-2px) scale(1.04);
+      box-shadow: 0 8px 32px rgba(102, 126, 234, 0.5);
+    }
+
+    .hero-btn:hover::before {
+      opacity: 1;
+    }
+
+    .hero-btn:active {
+      transform: scale(0.96);
+    }
+
+    .hero-btn .btn-icon {
+      font-size: 1.2rem;
+      transition: transform 0.3s;
+    }
+
+    .hero-btn:hover .btn-icon {
+      transform: rotate(20deg) scale(1.2);
+    }
+
+    /* ── Confetti Particle ── */
+    .confetti {
+      position: fixed;
+      pointer-events: none;
+      z-index: 9999;
+      font-size: 1.2rem;
+      animation: confetti-fall linear forwards;
+    }
+
+    @keyframes confetti-fall {
+      0% {
+        opacity: 1;
+        transform: translateY(0) rotate(0deg) scale(1);
+      }
+      80% {
+        opacity: 1;
+      }
+      100% {
+        opacity: 0;
+        transform: translateY(calc(100vh + 40px)) rotate(720deg) scale(0.3);
+      }
+    }
+
+    /* ── Ripple effect ── */
+    .ripple {
+      position: absolute;
+      border-radius: 50%;
+      background: rgba(102, 126, 234, 0.15);
+      transform: scale(0);
+      animation: ripple-expand 0.6s ease-out forwards;
+      pointer-events: none;
+    }
+
+    @keyframes ripple-expand {
+      to {
+        transform: scale(4);
+        opacity: 0;
+      }
+    }
+
+    /* ── Avatar click spin ── */
+    .avatar {
+      cursor: pointer;
+      transition: transform 0.3s;
+    }
+
+    .avatar.spin {
+      animation: avatar-spin 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    @keyframes avatar-spin {
+      0% { transform: rotate(0deg) scale(1); }
+      25% { transform: rotate(15deg) scale(1.1); }
+      50% { transform: rotate(-10deg) scale(1.15); }
+      75% { transform: rotate(5deg) scale(1.05); }
+      100% { transform: rotate(0deg) scale(1); }
+    }
+
+    /* ── Hobby card click bounce ── */
+    .hobby-item {
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hobby-item.bounce {
+      animation: card-bounce 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    @keyframes card-bounce {
+      0% { transform: scale(1); }
+      30% { transform: scale(0.9); }
+      50% { transform: scale(1.08); }
+      70% { transform: scale(0.98); }
+      100% { transform: scale(1); }
+    }
+
+    /* ── Floating emoji ── */
+    .floating-emoji {
+      position: fixed;
+      pointer-events: none;
+      z-index: 9999;
+      font-size: 2rem;
+      animation: emoji-float 1.5s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    }
+
+    @keyframes emoji-float {
+      0% {
+        opacity: 1;
+        transform: translateY(0) scale(0.5);
+      }
+      50% {
+        opacity: 1;
+        transform: translateY(-60px) scale(1.2);
+      }
+      100% {
+        opacity: 0;
+        transform: translateY(-120px) scale(0.8);
+      }
+    }
+
+    /* ── Skill tag click pop ── */
+    .skill-tag {
+      cursor: pointer;
+      position: relative;
+    }
+
+    .skill-tag.pop {
+      animation: tag-pop 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    @keyframes tag-pop {
+      0% { transform: scale(1); }
+      40% { transform: scale(1.25) rotate(-3deg); }
+      70% { transform: scale(0.95) rotate(1deg); }
+      100% { transform: scale(1) rotate(0deg); }
+    }
+
+    /* ── Sparkle burst (for skill tags) ── */
+    .sparkle {
+      position: fixed;
+      pointer-events: none;
+      z-index: 9999;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      animation: sparkle-burst 0.6s ease-out forwards;
+    }
+
+    @keyframes sparkle-burst {
+      0% {
+        opacity: 1;
+        transform: translate(0, 0) scale(1);
+      }
+      100% {
+        opacity: 0;
+        transform: translate(var(--sx), var(--sy)) scale(0);
+      }
+    }
+
     /* ── Prefers reduced motion ── */
     @media (prefers-reduced-motion: reduce) {
       .fade-up {
@@ -461,6 +657,12 @@
 
       .avatar {
         animation: none;
+      }
+
+      .confetti,
+      .floating-emoji,
+      .sparkle {
+        display: none;
       }
     }
   </style>
@@ -481,6 +683,9 @@
         <span>Node.js</span>
         <span>Python</span>
       </div>
+      <button class="hero-btn" id="helloBtn">
+        <span class="btn-icon">👋</span> Say Hello!
+      </button>
     </div>
   </section>
 
@@ -577,8 +782,8 @@
 
   <footer>&copy; 2026 Kazuto Kimura. All rights reserved.</footer>
 
-  <!-- Scroll Animation Script -->
   <script>
+    /* ── Scroll Animation ── */
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -589,8 +794,146 @@
       },
       { threshold: 0.1, rootMargin: "0px 0px -40px 0px" }
     );
-
     document.querySelectorAll(".fade-up").forEach((el) => observer.observe(el));
+
+    /* ── Confetti burst ── */
+    const CONFETTI_EMOJIS = ["🎉", "🎊", "✨", "⭐", "💜", "💙", "🌟", "🎵", "🚀", "💫"];
+
+    function launchConfetti(x, y, count = 30) {
+      for (let i = 0; i < count; i++) {
+        const el = document.createElement("div");
+        el.className = "confetti";
+        el.textContent = CONFETTI_EMOJIS[Math.floor(Math.random() * CONFETTI_EMOJIS.length)];
+
+        const angle = (Math.PI * 2 * i) / count;
+        const spread = 80 + Math.random() * 160;
+        const startX = x + Math.cos(angle) * spread * (0.3 + Math.random() * 0.7);
+        const duration = 1.5 + Math.random() * 1.5;
+
+        el.style.left = startX + "px";
+        el.style.top = (y - 20 + (Math.random() - 0.5) * 40) + "px";
+        el.style.fontSize = (0.8 + Math.random() * 1.2) + "rem";
+        el.style.animationDuration = duration + "s";
+
+        document.body.appendChild(el);
+        el.addEventListener("animationend", () => el.remove());
+      }
+    }
+
+    /* ── Hello Button ── */
+    const helloBtn = document.getElementById("helloBtn");
+    const greetings = [
+      "Hello! 👋", "こんにちは！🌸", "Welcome! 🎉",
+      "Nice to meet you! 😊", "ようこそ！✨", "Hi there! 🚀"
+    ];
+    let greetIndex = 0;
+
+    helloBtn.addEventListener("click", (e) => {
+      const rect = helloBtn.getBoundingClientRect();
+      launchConfetti(rect.left + rect.width / 2, rect.top);
+
+      greetIndex = (greetIndex + 1) % greetings.length;
+      helloBtn.innerHTML = greetings[greetIndex];
+
+      setTimeout(() => {
+        helloBtn.innerHTML = '<span class="btn-icon">👋</span> Say Hello!';
+      }, 2000);
+    });
+
+    /* ── Avatar click ── */
+    const avatar = document.querySelector(".avatar");
+    const faces = ["K", "😎", "🤓", "👨‍💻", "✌️", "🙌"];
+    let faceIndex = 0;
+
+    avatar.addEventListener("click", () => {
+      avatar.classList.remove("spin");
+      void avatar.offsetWidth;
+      avatar.classList.add("spin");
+
+      faceIndex = (faceIndex + 1) % faces.length;
+      avatar.textContent = faces[faceIndex];
+
+      avatar.addEventListener("animationend", () => {
+        avatar.classList.remove("spin");
+      }, { once: true });
+    });
+
+    /* ── Hobby card click ── */
+    document.querySelectorAll(".hobby-item").forEach((item) => {
+      item.addEventListener("click", (e) => {
+        item.classList.remove("bounce");
+        void item.offsetWidth;
+        item.classList.add("bounce");
+
+        const icon = item.querySelector(".hobby-icon").textContent;
+        const rect = item.getBoundingClientRect();
+        for (let i = 0; i < 5; i++) {
+          const emoji = document.createElement("div");
+          emoji.className = "floating-emoji";
+          emoji.textContent = icon;
+          emoji.style.left = (rect.left + Math.random() * rect.width) + "px";
+          emoji.style.top = rect.top + "px";
+          emoji.style.animationDelay = (i * 0.1) + "s";
+          document.body.appendChild(emoji);
+          emoji.addEventListener("animationend", () => emoji.remove());
+        }
+
+        item.addEventListener("animationend", () => {
+          item.classList.remove("bounce");
+        }, { once: true });
+      });
+    });
+
+    /* ── Skill tag click ── */
+    const sparkleColors = ["#667eea", "#a855f7", "#ec4899", "#f59e0b", "#10b981"];
+
+    document.querySelectorAll(".skill-tag").forEach((tag) => {
+      tag.addEventListener("click", (e) => {
+        tag.classList.remove("pop");
+        void tag.offsetWidth;
+        tag.classList.add("pop");
+
+        const rect = tag.getBoundingClientRect();
+        const cx = rect.left + rect.width / 2;
+        const cy = rect.top + rect.height / 2;
+
+        for (let i = 0; i < 8; i++) {
+          const spark = document.createElement("div");
+          spark.className = "sparkle";
+          const angle = (Math.PI * 2 * i) / 8;
+          const dist = 30 + Math.random() * 30;
+          spark.style.setProperty("--sx", Math.cos(angle) * dist + "px");
+          spark.style.setProperty("--sy", Math.sin(angle) * dist + "px");
+          spark.style.left = cx + "px";
+          spark.style.top = cy + "px";
+          spark.style.background = sparkleColors[Math.floor(Math.random() * sparkleColors.length)];
+          document.body.appendChild(spark);
+          spark.addEventListener("animationend", () => spark.remove());
+        }
+
+        tag.addEventListener("animationend", () => {
+          tag.classList.remove("pop");
+        }, { once: true });
+      });
+    });
+
+    /* ── Contact icon ripple ── */
+    document.querySelectorAll(".contact-list .icon").forEach((icon) => {
+      icon.style.position = "relative";
+      icon.style.overflow = "hidden";
+      icon.addEventListener("click", (e) => {
+        const ripple = document.createElement("div");
+        ripple.className = "ripple";
+        const rect = icon.getBoundingClientRect();
+        const size = Math.max(rect.width, rect.height);
+        ripple.style.width = ripple.style.height = size + "px";
+        ripple.style.left = (e.clientX - rect.left - size / 2) + "px";
+        ripple.style.top = (e.clientY - rect.top - size / 2) + "px";
+        ripple.style.background = "rgba(255,255,255,0.4)";
+        icon.appendChild(ripple);
+        ripple.addEventListener("animationend", () => ripple.remove());
+      });
+    });
   </script>
 
 </body>
