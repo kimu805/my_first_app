@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kazuto Kimura - Profile</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Noto+Sans+JP:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <style>
+    /* ── Reset & Base ── */
+    *,
+    *::before,
+    *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: "Inter", "Noto Sans JP", "Hiragino Kaku Gothic ProN", sans-serif;
+      background: #f0f2f5;
+      color: #1a1a2e;
+      line-height: 1.8;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* ── Scroll Animations ── */
+    .fade-up {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+                  transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .fade-up.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* stagger children */
+    .fade-up:nth-child(2) { transition-delay: 0.1s; }
+    .fade-up:nth-child(3) { transition-delay: 0.2s; }
+
+    /* ── Hero Section ── */
+    .hero {
+      position: relative;
+      background: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
+      color: #fff;
+      text-align: center;
+      padding: 100px 24px 80px;
+      overflow: hidden;
+    }
+
+    /* animated gradient orbs */
+    .hero::before,
+    .hero::after {
+      content: "";
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(80px);
+      opacity: 0.5;
+      animation: float 8s ease-in-out infinite;
+    }
+
+    .hero::before {
+      width: 400px;
+      height: 400px;
+      background: radial-gradient(circle, #667eea, transparent 70%);
+      top: -100px;
+      left: -100px;
+    }
+
+    .hero::after {
+      width: 350px;
+      height: 350px;
+      background: radial-gradient(circle, #a855f7, transparent 70%);
+      bottom: -80px;
+      right: -80px;
+      animation-delay: -4s;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translate(0, 0) scale(1); }
+      33% { transform: translate(30px, -20px) scale(1.05); }
+      66% { transform: translate(-20px, 15px) scale(0.95); }
+    }
+
+    /* decorative grid */
+    .hero-grid {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+      background-size: 60px 60px;
+      pointer-events: none;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+    }
+
+    .avatar {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      margin: 0 auto 28px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 56px;
+      font-weight: 700;
+      border: 3px solid rgba(255, 255, 255, 0.2);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3),
+                  inset 0 0 32px rgba(255, 255, 255, 0.05);
+      animation: avatar-glow 4s ease-in-out infinite alternate;
+    }
+
+    @keyframes avatar-glow {
+      0% { box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3), 0 0 0 0 rgba(102, 126, 234, 0); }
+      100% { box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3), 0 0 40px 8px rgba(102, 126, 234, 0.2); }
+    }
+
+    .hero h1 {
+      font-size: 2.4rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      background: linear-gradient(135deg, #fff 0%, #c4b5fd 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero .subtitle {
+      margin-top: 12px;
+      font-size: 1.1rem;
+      opacity: 0.7;
+      font-weight: 300;
+      letter-spacing: 0.04em;
+    }
+
+    /* tag pills under subtitle */
+    .hero-tags {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 24px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-tags span {
+      padding: 6px 16px;
+      border-radius: 100px;
+      font-size: 0.8rem;
+      font-weight: 500;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      color: rgba(255, 255, 255, 0.8);
+      transition: background 0.3s, border-color 0.3s;
+    }
+
+    .hero-tags span:hover {
+      background: rgba(255, 255, 255, 0.15);
+      border-color: rgba(255, 255, 255, 0.25);
+    }
+
+    /* ── Container ── */
+    .container {
+      max-width: 760px;
+      margin: -40px auto 0;
+      padding: 0 20px 80px;
+      position: relative;
+      z-index: 2;
+    }
+
+    /* ── Card ── */
+    .card {
+      background: rgba(255, 255, 255, 0.8);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.6);
+      border-radius: 20px;
+      padding: 40px 36px;
+      margin-bottom: 24px;
+      box-shadow: 0 4px 24px rgba(0, 0, 0, 0.04),
+                  0 1px 2px rgba(0, 0, 0, 0.02);
+      transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+                  box-shadow 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.08),
+                  0 2px 8px rgba(0, 0, 0, 0.04);
+    }
+
+    .card h2 {
+      font-size: 1.15rem;
+      font-weight: 700;
+      margin-bottom: 20px;
+      padding-bottom: 12px;
+      display: inline-block;
+      position: relative;
+      letter-spacing: -0.01em;
+    }
+
+    .card h2::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      border-radius: 2px;
+      background: linear-gradient(90deg, #667eea, #a855f7);
+    }
+
+    .card p {
+      color: #4a4a5a;
+      font-size: 0.95rem;
+    }
+
+    /* ── About ── */
+    .about p + p {
+      margin-top: 14px;
+    }
+
+    /* ── Skills ── */
+    .skills-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 8px;
+    }
+
+    .skill-tag {
+      padding: 8px 18px;
+      border-radius: 10px;
+      font-size: 0.85rem;
+      font-weight: 500;
+      background: linear-gradient(135deg, #f0f0ff, #e8e0ff);
+      color: #4a3f8a;
+      border: 1px solid rgba(102, 126, 234, 0.1);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .skill-tag:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(102, 126, 234, 0.15);
+    }
+
+    /* ── Hobbies ── */
+    .hobbies-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 16px;
+      margin-top: 8px;
+    }
+
+    .hobby-item {
+      background: linear-gradient(135deg, #fafafe, #f4f0ff);
+      border: 1px solid rgba(102, 126, 234, 0.08);
+      border-radius: 16px;
+      padding: 24px 16px;
+      text-align: center;
+      transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1),
+                  box-shadow 0.3s,
+                  background 0.3s;
+      cursor: default;
+    }
+
+    .hobby-item:hover {
+      transform: translateY(-4px) scale(1.02);
+      box-shadow: 0 8px 24px rgba(102, 126, 234, 0.12);
+      background: linear-gradient(135deg, #f0edff, #e8e0ff);
+    }
+
+    .hobby-icon {
+      font-size: 2.2rem;
+      margin-bottom: 10px;
+      transition: transform 0.3s;
+    }
+
+    .hobby-item:hover .hobby-icon {
+      transform: scale(1.15);
+    }
+
+    .hobby-label {
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: #3a3a4a;
+    }
+
+    /* ── Contact ── */
+    .contact-list {
+      list-style: none;
+      margin-top: 8px;
+    }
+
+    .contact-list li {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 16px 18px;
+      border-radius: 14px;
+      transition: background 0.3s, transform 0.3s;
+    }
+
+    .contact-list li:hover {
+      background: rgba(102, 126, 234, 0.04);
+      transform: translateX(4px);
+    }
+
+    .contact-list .icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, #667eea, #a855f7);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.15rem;
+      flex-shrink: 0;
+      box-shadow: 0 4px 12px rgba(102, 126, 234, 0.25);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .contact-list li:hover .icon {
+      transform: scale(1.08);
+      box-shadow: 0 6px 20px rgba(102, 126, 234, 0.35);
+    }
+
+    .contact-list .label {
+      font-size: 0.75rem;
+      color: #999;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      font-weight: 600;
+    }
+
+    .contact-list .value {
+      font-size: 0.95rem;
+      color: #333;
+      font-weight: 500;
+    }
+
+    .contact-list a {
+      color: #667eea;
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .contact-list a:hover {
+      color: #a855f7;
+    }
+
+    /* ── Footer ── */
+    footer {
+      text-align: center;
+      padding: 32px 24px;
+      font-size: 0.8rem;
+      color: #bbb;
+      letter-spacing: 0.02em;
+    }
+
+    footer a {
+      color: #667eea;
+      text-decoration: none;
+    }
+
+    /* ── Responsive: Tablet ── */
+    @media (max-width: 768px) {
+      .hero {
+        padding: 80px 20px 64px;
+      }
+
+      .hero h1 {
+        font-size: 2rem;
+      }
+
+      .container {
+        max-width: 100%;
+      }
+
+      .card {
+        padding: 32px 28px;
+      }
+    }
+
+    /* ── Responsive: Mobile ── */
+    @media (max-width: 480px) {
+      .hero {
+        padding: 64px 16px 52px;
+      }
+
+      .hero h1 {
+        font-size: 1.7rem;
+      }
+
+      .hero .subtitle {
+        font-size: 0.95rem;
+      }
+
+      .avatar {
+        width: 120px;
+        height: 120px;
+        font-size: 46px;
+      }
+
+      .hero-tags span {
+        font-size: 0.72rem;
+        padding: 5px 12px;
+      }
+
+      .card {
+        padding: 28px 22px;
+        border-radius: 16px;
+      }
+
+      .hobbies-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+      }
+
+      .hobby-item {
+        padding: 18px 12px;
+      }
+
+      .contact-list li {
+        padding: 12px 14px;
+      }
+    }
+
+    /* ── Prefers reduced motion ── */
+    @media (prefers-reduced-motion: reduce) {
+      .fade-up {
+        opacity: 1;
+        transform: none;
+        transition: none;
+      }
+
+      .hero::before,
+      .hero::after {
+        animation: none;
+      }
+
+      .avatar {
+        animation: none;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-grid"></div>
+    <div class="hero-content">
+      <div class="avatar">K</div>
+      <h1>Kazuto Kimura</h1>
+      <p class="subtitle">Web Developer / Software Engineer</p>
+      <div class="hero-tags">
+        <span>JavaScript</span>
+        <span>TypeScript</span>
+        <span>React</span>
+        <span>Node.js</span>
+        <span>Python</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Main Content -->
+  <div class="container">
+
+    <!-- About -->
+    <section class="card about fade-up">
+      <h2>About Me</h2>
+      <p>
+        はじめまして、木村和人です。ソフトウェアエンジニアとしてWebアプリケーションの開発に携わっています。
+        ユーザーにとって使いやすく、美しいプロダクトを作ることに情熱を持っています。
+      </p>
+      <p>
+        新しい技術を学ぶことが好きで、日々スキルアップに取り組んでいます。
+        チームでの協力を大切にし、より良いソフトウェアを一緒に作り上げていきたいと考えています。
+      </p>
+    </section>
+
+    <!-- Skills -->
+    <section class="card fade-up">
+      <h2>Skills</h2>
+      <div class="skills-grid">
+        <div class="skill-tag">HTML / CSS</div>
+        <div class="skill-tag">JavaScript</div>
+        <div class="skill-tag">TypeScript</div>
+        <div class="skill-tag">React</div>
+        <div class="skill-tag">Node.js</div>
+        <div class="skill-tag">Python</div>
+        <div class="skill-tag">Git</div>
+        <div class="skill-tag">Docker</div>
+      </div>
+    </section>
+
+    <!-- Hobbies -->
+    <section class="card fade-up">
+      <h2>Hobbies</h2>
+      <div class="hobbies-grid">
+        <div class="hobby-item">
+          <div class="hobby-icon">💻</div>
+          <div class="hobby-label">プログラミング</div>
+        </div>
+        <div class="hobby-item">
+          <div class="hobby-icon">📖</div>
+          <div class="hobby-label">読書</div>
+        </div>
+        <div class="hobby-item">
+          <div class="hobby-icon">🎵</div>
+          <div class="hobby-label">音楽鑑賞</div>
+        </div>
+        <div class="hobby-item">
+          <div class="hobby-icon">🏃</div>
+          <div class="hobby-label">ランニング</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact -->
+    <section class="card fade-up">
+      <h2>Contact</h2>
+      <ul class="contact-list">
+        <li>
+          <div class="icon">✉</div>
+          <div>
+            <div class="label">Email</div>
+            <div class="value"><a href="mailto:kazuto@example.com">kazuto@example.com</a></div>
+          </div>
+        </li>
+        <li>
+          <div class="icon">🐙</div>
+          <div>
+            <div class="label">GitHub</div>
+            <div class="value"><a href="#">github.com/kazuto-kimura</a></div>
+          </div>
+        </li>
+        <li>
+          <div class="icon">🔗</div>
+          <div>
+            <div class="label">LinkedIn</div>
+            <div class="value"><a href="#">linkedin.com/in/kazuto-kimura</a></div>
+          </div>
+        </li>
+        <li>
+          <div class="icon">📍</div>
+          <div>
+            <div class="label">Location</div>
+            <div class="value">Tokyo, Japan</div>
+          </div>
+        </li>
+      </ul>
+    </section>
+
+  </div>
+
+  <footer>&copy; 2026 Kazuto Kimura. All rights reserved.</footer>
+
+  <!-- Scroll Animation Script -->
+  <script>
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("visible");
+          }
+        });
+      },
+      { threshold: 0.1, rootMargin: "0px 0px -40px 0px" }
+    );
+
+    document.querySelectorAll(".fade-up").forEach((el) => observer.observe(el));
+  </script>
+
+</body>
+</html>
